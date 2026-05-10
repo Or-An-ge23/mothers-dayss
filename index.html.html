@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>母亲节快乐</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 480px;
+}
+
+.card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 32px;
+  padding: 40px 28px;
+  box-shadow: 0 20px 60px rgba(233,30,99,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(244,143,177,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(233,30,99,0.05) 0%, transparent 50%);
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5%, 5%); }
+}
+
+/* 花卉装饰 */
+.flower {
+  position: absolute;
+  font-size: 24px;
+  opacity: 0;
+  animation: floatUp 6s ease-in-out infinite;
+}
+.f1 { top: -10px; left: 10%; animation-delay: 0s; }
+.f2 { top: -10px; right: 10%; animation-delay: 1.5s; }
+.f3 { top: -10px; left: 40%; animation-delay: 3s; }
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg) scale(0); opacity: 0; }
+  10% { opacity: 0.6; transform: translateY(0) rotate(0deg) scale(1); }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-30px) rotate(20deg) scale(0.8); opacity: 0; }
+}
+
+/* 主标题 */
+.heart-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+  animation: heartBeat 1.4s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #c2185b;
+  margin-bottom: 6px;
+  letter-spacing: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #e91e63;
+  opacity: 0.6;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+/* 祝福语 */
+.message-area {
+  position: relative;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-message {
+  font-size: 20px;
+  line-height: 1.8;
+  color: #4a2040;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.6s ease;
+}
+
+.main-message.hidden {
+  display: none;
+}
+
+/* 点击按钮 */
+.tap-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #e91e63, #c2185b);
+  color: #fff;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(233,30,99,0.35);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.tap-btn:active {
+  transform: scale(0.95);
+}
+
+.tap-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.tap-btn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* 照片区域 */
+.photo-area {
+  margin: 20px 0;
+  position: relative;
+}
+
+.photo-frame {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+  border: 3px solid rgba(233,30,99,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  box-shadow: 0 8px 32px rgba(233,30,99,0.12);
+  animation: photoGlow 3s ease-in-out infinite;
+}
+
+@keyframes photoGlow {
+  0%, 100% { box-shadow: 0 8px 32px rgba(233,30,99,0.12); }
+  50% { box-shadow: 0 8px 48px rgba(233,30,99,0.25); }
+}
+
+/* 底部信息 */
+.footer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #c2185b;
+  opacity: 0.5;
+  letter-spacing: 1px;
+}
+
+/* 漂浮花瓣 */
+.petal {
+  position: fixed;
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 1;
+  animation: petalFall linear forwards;
+  opacity: 0;
+}
+
+@keyframes petalFall {
+  0% { transform: translateY(-20px) rotate(0deg) scale(0.8); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(100vh) rotate(360deg) scale(1.2); opacity: 0; }
+}
+
+/* 展开消息 */
+.blessing-full {
+  display: none;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.blessing-full.show {
+  display: block;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.blessing-text {
+  font-size: 18px;
+  line-height: 2;
+  color: #4a2040;
+  letter-spacing: 1px;
+}
+
+.blessing-text .highlight {
+  color: #e91e63;
+  font-weight: 600;
+}
+
+.signature {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #c2185b;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+/* 点击波纹 */
+.ripple {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(233,30,99,0.15);
+  transform: scale(0);
+  animation: rippleEffect 0.6s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes rippleEffect {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* 星星闪烁 */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #e91e63;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkle 2s ease-in-out infinite;
+}
+.s1 { top: 20%; left: 15%; animation-delay: 0s; }
+.s2 { top: 30%; right: 20%; animation-delay: 0.7s; }
+.s3 { bottom: 25%; left: 25%; animation-delay: 1.4s; }
+.s4 { bottom: 20%; right: 15%; animation-delay: 2.1s; }
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 0.6; transform: scale(1); }
+}
+
+/* 点击后状态 */
+.card.opened .tap-btn {
+  display: none;
+}
+
+.card.opened .main-message.hidden {
+  display: none;
+}
+
+/* 妈妈头像占位图标 */
+.mom-icon {
+  font-size: 54px;
+  line-height: 1;
+}
+
+/* 信息确认 */
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #c2185b;
+  opacity: 0.7;
+}
+
+.info-row span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 安全区域 */
+.safe-area-bottom {
+  height: env(safe-area-inset-bottom, 0);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card" id="card">
+    <div class="flower f1">🌸</div>
+    <div class="flower f2">🌷</div>
+    <div class="flower f3">🌺</div>
+    <div class="sparkle s1"></div>
+    <div class="sparkle s2"></div>
+    <div class="sparkle s3"></div>
+    <div class="sparkle s4"></div>
+
+    <span class="heart-icon">💕</span>
+    <div class="title">母亲节快乐</div>
+    <div class="subtitle">Happy Mother's Day</div>
+
+    <div class="photo-area">
+      <div class="photo-frame">
+        <span class="mom-icon">👩</span>
+      </div>
+    </div>
+
+    <div class="message-area">
+      <div class="main-message" id="mainMsg">
+        点击下方按钮<br>送上母亲节祝福 💝
+      </div>
+      <div class="blessing-full" id="blessingFull">
+        <div class="blessing-text">
+          <p>🌹 亲爱的妈妈 🌹</p>
+          <br>
+          <p>感谢您用<span class="highlight">温柔</span>为我撑起世界</p>
+          <p>用<span class="highlight">白发</span>换来我的成长</p>
+          <p>用<span class="highlight">皱纹</span>记录爱的时光</p>
+          <br>
+          <p>您的<span class="highlight">笑容</span>是我最大的幸福</p>
+          <p>您的<span class="highlight">健康</span>是我最深的祈愿</p>
+          <br>
+          <p>愿岁月<span class="highlight">温柔以待</span></p>
+          <p>愿您永远<span class="highlight">被爱包围</span></p>
+          <br>
+          <div class="signature">—— 爱您的孩子 ❤️</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="tap-btn" id="tapBtn">💐 点我送祝福</button>
+
+    <div class="info-row">
+      <span>📅 2026年5月10日</span>
+      <span>💗 母亲节</span>
+    </div>
+
+    <div class="footer">* 点击屏幕任意位置撒花 *</div>
+  </div>
+</div>
+
+<div class="safe-area-bottom"></div>
+
+<script>
+(function() {
+  var card = document.getElementById('card');
+  var tapBtn = document.getElementById('tapBtn');
+  var mainMsg = document.getElementById('mainMsg');
+  var blessingFull = document.getElementById('blessingFull');
+  var opened = false;
+
+  var petals = ['🌸', '🌷', '🌺', '💐', '🌹', '💕', '✨', '🌻'];
+
+  function createPetal() {
+    var el = document.createElement('div');
+    el.className = 'petal';
+    el.textContent = petals[Math.floor(Math.random() * petals.length)];
+    el.style.left = Math.random() * 100 + '%';
+    el.style.fontSize = (14 + Math.random() * 16) + 'px';
+    el.style.animationDuration = (4 + Math.random() * 4) + 's';
+    el.style.animationDelay = (Math.random() * 2) + 's';
+    document.body.appendChild(el);
+    setTimeout(function() { el.remove(); }, 8000);
+  }
+
+  function startPetals() {
+    for (var i = 0; i < 20; i++) {
+      setTimeout(createPetal, i * 150);
+    }
+    var interval = setInterval(function() {
+      if (document.hidden) return;
+      createPetal();
+    }, 400);
+    setTimeout(function() { clearInterval(interval); }, 8000);
+  }
+
+  function createRipple(x, y) {
+    var el = document.createElement('div');
+    el.className = 'ripple';
+    var size = 40;
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.style.left = (x - size / 2) + 'px';
+    el.style.top = (y - size / 2) + 'px';
+    document.body.appendChild(el);
+    setTimeout(function() { el.remove(); }, 600);
+  }
+
+  function openCard(x, y) {
+    if (opened) return;
+    opened = true;
+    card.classList.add('opened');
+    mainMsg.classList.add('hidden');
+    blessingFull.classList.add('show');
+
+    // 触觉反馈
+    if (navigator.vibrate) navigator.vibrate(20);
+
+    // 点击涟漪
+    if (x && y) createRipple(x, y);
+
+    // 撒花
+    startPetals();
+  }
+
+  tapBtn.addEventListener('click', function(e) {
+    var rect = tapBtn.getBoundingClientRect();
+    openCard(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  });
+
+  tapBtn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    var rect = tapBtn.getBoundingClientRect();
+    openCard(rect.left + rect.width / 2, rect.top + rect.height / 2);
+  });
+
+  // 点击背景也可触发（footer 提示）
+  document.addEventListener('click', function(e) {
+    if (opened) return;
+    if (e.target.closest('.tap-btn')) return;
+    openCard(e.clientX, e.clientY);
+  });
+
+  document.addEventListener('touchstart', function(e) {
+    if (opened) return;
+    var touch = e.touches[0];
+    window._tapX = touch.clientX;
+    window._tapY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    if (opened) return;
+    if (e.target.closest('.tap-btn')) return;
+    if (window._tapX && window._tapY) {
+      openCard(window._tapX, window._tapY);
+    }
+  }, { passive: true });
+
+  // 预撒几片花瓣
+  setTimeout(function() {
+    for (var i = 0; i < 5; i++) {
+      setTimeout(createPetal, i * 200);
+    }
+  }, 500);
+})();
+</script>
+</body>
+</html>
